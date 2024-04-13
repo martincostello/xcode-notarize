@@ -108,20 +108,11 @@ const submit = async ({productPath, archivePath, appleID, teamID, password, verb
         throw Error("Unknown failure - notarytool did not run at all?");
     }
 
-    if (exitCode !== 0) {
-        const response = stdout;
-        if (verbose === true) {
-            console.log(response);
-        }
-        return false;
-    }
-
-    const response = JSON.parse(stdout);
     if (verbose === true) {
-        console.log(response);
+        console.log(stdout);
     }
 
-    return true;
+    return exitCode === 0;
 };
 
 const main = async () => {
